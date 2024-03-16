@@ -1,6 +1,6 @@
 let xp = 0
 let health = 100
-let gold = 50000
+let gold = 60
 let currentWeapon = 0
 let fighting
 let monsterHealth
@@ -44,7 +44,7 @@ const locations = [
     name: "Міська площа",
     "button text": ["В магазин", "В печеру", "Атакувати дракона"],
     "button functions": [goStore, goCave, fightDragon],
-    text: "Ви на Міській площі. Ви бачите вивіску 'Магазин'."
+    text: "Ви на Міській площі в місті Даларан. Ви бачите вивіску 'Магазин'."
   },
   {
     name: "магазин",
@@ -158,7 +158,7 @@ function sellWeapon() {
     text.innerText = "Ви продали " + currentWeapon + "."
     text.innerText += " У вашому інвентарі є: " + inventory
   } else {
-    text.innerText = "Не продавай свою єдину зброю!"
+    text.innerText = "Не продавай свою єдину зброю!" + " У вашому інвентарі є: " + inventory
   }
 }
 

@@ -44,7 +44,7 @@ const locations = [
     name: "town square",
     "button text": ["Go to store", "Go to cave", "Fight dragon"],
     "button functions": [goStore, goCave, fightDragon],
-    text: "You are in the town square. You see a sign that says \"Store\"."
+    text: "You are in the Town Square in the city of Dalaran. You see a sign that says 'Store'."
   },
   {
     name: "store",
@@ -157,7 +157,7 @@ function sellWeapon() {
     text.innerText = "You sold a " + currentWeapon + "."
     text.innerText += " In your inventory you have: " + inventory
   } else {
-    text.innerText = "Don't sell your only weapon!"
+    text.innerText = "Don't sell your only weapon!" + " In your inventory you have: " + inventory
   }
 }
 
