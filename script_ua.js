@@ -1,10 +1,10 @@
 let xp = 0
 let health = 100
-let gold = 50
+let gold = 50000
 let currentWeapon = 0
 let fighting
 let monsterHealth
-let inventory = ["stick"]
+let inventory = ["кулак"]
 
 const button1 = document.querySelector('#button1')
 const button2 = document.querySelector("#button2")
@@ -17,78 +17,79 @@ const monsterStats = document.querySelector("#monsterStats")
 const monsterName = document.querySelector("#monsterName")
 const monsterHealthText = document.querySelector("#monsterHealth")
 const weapons = [
-  { name: 'stick', power: 5 },
-  { name: 'dagger', power: 30 },
-  { name: 'claw hammer', power: 50 },
-  { name: 'sword', power: 100 }
+  { name: 'кулак', power: 5 },
+  { name: 'кинджал', power: 30 },
+  { name: 'молот', power: 50 },
+  { name: 'меч', power: 100 }
 ]
 const monsters = [
   {
-    name: "slime",
+    name: "Слимак",
     level: 2,
     health: 15
   },
   {
-    name: "fanged beast",
+    name: "Кабан",
     level: 8,
     health: 60
   },
   {
-    name: "dragon",
+    name: "дракон",
     level: 20,
     health: 300
   }
 ]
 const locations = [
   {
-    name: "town square",
-    "button text": ["Go to store", "Go to cave", "Fight dragon"],
+    name: "Міська площа",
+    "button text": ["В магазин", "В печеру", "Атакувати дракона"],
     "button functions": [goStore, goCave, fightDragon],
-    text: "You are in the town square. You see a sign that says \"Store\"."
+    text: "Ви на Міській площі. Ви бачите вивіску 'Магазин'."
   },
   {
-    name: "store",
-    "button text": ["Buy 10 health (10 gold)", "Buy weapon (30 gold)", "Go to town square"],
+    name: "магазин",
+    "button text": ["10 здоров'я (10 монет)", "Нова зброя (30 монет)", "На Міську площу"],
     "button functions": [buyHealth, buyWeapon, goTown],
-    text: "You enter the store."
+    text: "Ви зайшли в магазин. Що бажаєте купити ?"
   },
   {
-    name: "cave",
-    "button text": ["Fight slime", "Fight fanged beast", "Go to town square"],
+    name: "печера",
+    "button text": ["Атакувати слимака", "Атакувати кабана", "На міську площу"],
     "button functions": [fightSlime, fightBeast, goTown],
-    text: "You enter the cave. You see some monsters."
+    text: "Ви заходите в печеру. Ви бачите деяких монстрів."
   },
   {
-    name: "fight",
-    "button text": ["Attack", "Dodge", "Run"],
+    name: "атакувати",
+    "button text": ["Атакувати", "Ухилятись", "Бігти"],
     "button functions": [attack, dodge, goTown],
-    text: "You are fighting a monster."
+    text: "Ви атакуєте монстра."
   },
   {
-    name: "kill monster",
-    "button text": ["Go to town square", "Go to town square", "Go to town square"],
+    name: "Вбив монстра",
+    "button text": ["На міську площу", "На міську площу", "На міську площу"],
     "button functions": [goTown, goTown, easterEgg],
-    text: 'The monster screams "Arg!" as it dies. You gain experience points and find gold.'
+    text: 'Монстр кричить "АРРР!" поки вмирає. Ви отримуєте очки досвіду та знаходите золото.'
   },
   {
-    name: "lose",
-    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    name: "програш",
+    "button text": ["ПОВТОР?", "ПОВТОР?", "ПОВТОР?"],
     "button functions": [restart, restart, restart],
-    text: "You die. &#x2620;"
+    text: "Ви померли &#x2620;"
   },
   {
-    name: "win",
-    "button text": ["REPLAY?", "REPLAY?", "REPLAY?"],
+    name: "перемога",
+    "button text": ["ПОВТОР?", "ПОВТОР?", "ПОВТОР?"],
     "button functions": [restart, restart, restart],
-    text: "You defeat the dragon! YOU WIN THE GAME! &#x1F389;"
+    text: "Ви перемогли дракона! ВИ ПЕРЕМОГЛИ ГРУ! &#x1F389;"
   },
   {
-    name: "easter egg",
-    "button text": ["2", "8", "Go to town square?"],
+    name: "пасхалка",
+    "button text": ["2", "8", "Йти на міську площу?"],
     "button functions": [pickTwo, pickEight, goTown],
-    text: "You find a secret game. Pick a number above. Ten numbers will be randomly chosen between 0 and 10. If the number you choose matches one of the random numbers, you win!"
+    text: "Ви знайшли пасхалку(секретну гру). Виберіть номер вище. Буде випадковим чином вибрано десять чисел від 0 до 10. Якщо вибране вами число збігається з одним із випадкових чисел, ви виграєте! Якщо ні - втратите 10 здоров'я. Удачі! Москалів - на ножі!"
   }
 ]
+
 
 // initialize buttons
 button1.onclick = goStore
@@ -125,7 +126,7 @@ function buyHealth() {
     goldText.innerText = gold
     healthText.innerText = health
   } else {
-    text.innerText = "You do not have enough gold to buy health."
+    text.innerText = "У вас недостатньо золота, щоб купити здоров'є."
   }
 }
 
@@ -136,15 +137,15 @@ function buyWeapon() {
       currentWeapon++
       goldText.innerText = gold
       let newWeapon = weapons[currentWeapon].name
-      text.innerText = "You now have a " + newWeapon + "."
+      text.innerText = "Тепер у вас є " + newWeapon + "."
       inventory.push(newWeapon)
-      text.innerText += " In your inventory you have: " + inventory
+      text.innerText += "У вашому інвентарі є: " + inventory
     } else {
-      text.innerText = "You do not have enough gold to buy a weapon."
+      text.innerText = "У вас недостатньо золота, щоб купити зброю."
     }
   } else {
-    text.innerText = "You already have the most powerful weapon!"
-    button2.innerText = "Sell weapon for 15 gold"
+    text.innerText = "У вас вже є найпотужніша зброя!"
+    button2.innerText = "Продати зброю (+15 монет)"
     button2.onclick = sellWeapon
   }
 }
@@ -154,10 +155,10 @@ function sellWeapon() {
     gold += 15
     goldText.innerText = gold
     let currentWeapon = inventory.shift()
-    text.innerText = "You sold a " + currentWeapon + "."
-    text.innerText += " In your inventory you have: " + inventory
+    text.innerText = "Ви продали " + currentWeapon + "."
+    text.innerText += " У вашому інвентарі є: " + inventory
   } else {
-    text.innerText = "Don't sell your only weapon!"
+    text.innerText = "Не продавай свою єдину зброю!"
   }
 }
 
@@ -185,13 +186,13 @@ function goFight() {
 }
 
 function attack() {
-  text.innerText = "The " + monsters[fighting].name + " attacks."
-  text.innerText += " You attack it with your " + weapons[currentWeapon].name + "."
+  text.innerText = "  " + monsters[fighting].name + " атакує."
+  text.innerText += " Ви атакуєте його своїм " + weapons[currentWeapon].name + "ом" + "."
   health -= getMonsterAttackValue(monsters[fighting].level)
   if (isMonsterHit()) {
     monsterHealth -= weapons[currentWeapon].power + Math.floor(Math.random() * xp) + 1
   } else {
-    text.innerText += " You miss."
+    text.innerText += " Ви промахнулись."
   }
   healthText.innerText = health
   monsterHealthText.innerText = monsterHealth
@@ -205,7 +206,7 @@ function attack() {
     }
   }
   if (Math.random() <= .1 && inventory.length !== 1) {
-    text.innerText += " Your " + inventory.pop() + " breaks."
+    text.innerText += " Ваш " + inventory.pop() + " зламався."
     currentWeapon--
   }
 }
@@ -221,7 +222,7 @@ function isMonsterHit() {
 }
 
 function dodge() {
-  text.innerText = "You dodge the attack from the " + monsters[fighting].name
+  text.innerText = "Ви ухиляєтесь від атаки " + monsters[fighting].name + "а"
 }
 
 function defeatMonster() {
@@ -245,7 +246,7 @@ function restart() {
   health = 100
   gold = 50
   currentWeapon = 0
-  inventory = ["stick"]
+  inventory = ["кулак"]
   goldText.innerText = gold
   healthText.innerText = health
   xpText.innerText = xp
@@ -269,16 +270,16 @@ function pick(guess) {
   while (numbers.length < 10) {
     numbers.push(Math.floor(Math.random() * 11))
   }
-  text.innerText = "You picked " + guess + ". Here are the random numbers:\n"
+  text.innerText = "Ви вибрали " + guess + ". Ось випадкові числа:\n"
   for (let i = 0; i < 10; i++) {
     text.innerText += numbers[i] + "\n"
   }
   if (numbers.includes(guess)) {
-    text.innerText += "Right! You win 20 gold!"
+    text.innerText += "Правильно! Ви виграєте 20 монет!"
     gold += 20
     goldText.innerText = gold
   } else {
-    text.innerText += "Wrong! You lose 10 health!"
+    text.innerText += "Неправильно! Ви втрачаєте 10 здоров'я!"
     health -= 10
     healthText.innerText = health
     if (health <= 0) {
@@ -303,7 +304,7 @@ function switchLanguage() {
 // Додаємо обробник події для кнопки
 document.getElementById('languageSwitcher').addEventListener('click', switchLanguage)
 
-// Toggle music
+// Музика Вкл/Викл
 var audio = document.getElementById("myAudio")
 
 function toggleMusic() {

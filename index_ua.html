@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="ua">
+  <head>
+    <meta charset="utf-8" />
+    <title>Срібний Лицар, гра</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <link type="Image/x-icon" href="/favicon.ico" rel="icon" />
+  </head>
+  <body>
+    <div id="header">
+      <header>
+        <button id="languageSwitcher">Switch to English</button>
+        <audio id="myAudio" src="./sound.mp3" loop></audio>
+        <button onclick="toggleMusic()">Увімк./Вимк. музику</button>
+      </header>
+    </div>
+    <div id="game">
+      <div id="stats">
+        <span class="stat"
+          >XP: <strong><span id="xpText">0</span></strong></span
+        >
+        <span class="stat"
+          >Здоров'я: <strong><span id="healthText">100</span></strong></span
+        >
+        <span class="stat"
+          >Золото: <strong><span id="goldText">50</span></strong></span
+        >
+      </div>
+      <div id="controls">
+        <button id="button1">В магазин</button>
+        <button id="button2">В печеру</button>
+        <button id="button3">Атакувати дракона</button>
+      </div>
+      <div id="monsterStats">
+        <span class="stat"
+          >Монстр: <strong><span id="monsterName"></span></strong
+        ></span>
+        <span class="stat"
+          >Здоров'я: <strong><span id="monsterHealth"></span></strong
+        ></span>
+      </div>
+      <div id="text">
+        Ласкаво просимо до гри Міф. Ви повинні перемогти дракона, який не дає
+        людям покинути місто Даларан. Ви на міській площі. Куди ти хочеш піти?
+        Використовуйте кнопки вище.<br /><br />
+        Якщо вам сподобалось і ви хочете мене підтримати - paypal:
+        it.zero.chak@gmail.com
+        <a href="https://send.monobank.ua/3H5eBxjRCE" target="_blank"
+          >Або монобанк</a
+        >
+      </div>
+    </div>
+    <script src="./script_ua.js"></script>
+  </body>
+</html>
